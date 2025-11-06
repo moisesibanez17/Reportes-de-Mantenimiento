@@ -1,4 +1,4 @@
-/* ======================================================================
+  /* ======================================================================
    VARIABLES Y ESTILOS GLOBALES
    ====================================================================== */
 :root {
@@ -1882,4 +1882,30 @@ body::after {
     .tableau-ideal {
         grid-template-columns: 1fr;
     }
+}
+
+/* ==========================
+     Estilos del formulario CUCEI
+     ========================== */
+.feedback-form .form-row { margin-bottom: 12px; }
+.feedback-form label { display: block; margin-bottom: 6px; font-weight:700; color: #333; }
+.feedback-form input[type="text"],
+.feedback-form input[type="email"],
+.feedback-form select,
+.feedback-form textarea { width: 100%; padding: 10px 12px; border: 1px solid rgba(0,0,0,0.12); border-radius: 8px; font-size: 1rem; }
+.feedback-form textarea { min-height: 120px; resize: vertical; }
+.checkbox-row { display:flex; gap:10px; align-items:center; }
+.actions { display:flex; gap:10px; align-items:center; margin-top:8px; }
+.actions .button { padding: 10px 16px; }
+
+/* Submissions list */
+#submissionsList { list-style: none; padding-left: 0; margin: 0; }
+#submissionsList li { background: rgba(255,255,255,0.96); margin-bottom: 10px; }
+
+/* Mensajes del formulario (usa clases ya definidas .msg-success/.msg-error) */
+.subscribe-msg { font-size: 0.98rem; }
+
+@media (max-width: 520px) {
+    .actions { flex-direction: column; }
+    .actions .button { width: 100%; }
 }

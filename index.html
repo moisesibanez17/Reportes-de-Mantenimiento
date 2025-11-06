@@ -1,735 +1,106 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Software UDG: Licencias y Beneficios Educativos</title>
-    <link rel="icon" type="image/png" href="assets/ICONO.png">
-    <link rel="apple-touch-icon" href="assets/ICONO.png">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Reportes de mantenimiento (CUCEI)</title>
+  <link rel="icon" type="image/x-icon"   href="./assets/ICONO.png">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Formulario para enviar reportes de mantenimiento sobre el plantel CUCEI">
 </head>
 <body>
-
-    <header class="header">
+  <header class="header">
     <img src="./assets/GB.png" alt="Logo GB" class="brand-logo" width="100" height="100">
     <img src="./assets/GD.png" alt="Logo GD" class="brand-logo" width="100" height="75">
     <img src="./assets/GI.png" alt="Logo GI" class="brand-logo" width="100" height="75">
-        <h1>Licencias de Software y Beneficios Educativos UDG 🎓</h1>
-        <p>Tu guía centralizada para acceder a herramientas profesionales gratuitas como estudiante o personal de la Universidad de Guadalajara.</p>
-    </header>
+    <h1>Reportes de mantenimiento</h1>
+    <h2>CUCEI</h2>
+    <p>Usa este formulario para compartir retroalimentación sobre el plantel. Tu aporte es valioso para mejorar nuestras instalaciones y servicios.</p>
+  </header>
 
-    <nav class="nav">
-        <a href="#productividad">Productividad</a>
-        <a href="#tiempo-limitado">Ofertas Limitadas</a>
-        <a href="#especializado">Especializado</a>
-        <a href="#beneficios-adicionales">Beneficios Extra</a>
-        <a href="#faq">Preguntas</a>
-    </nav>
+  <main style="max-width:900px;margin:36px auto;padding:20px;">
 
-    <section id="productividad" class="section-cards">
-        <div class="card title-card">
-            <h2>💻 Productividad Esencial</h2>
-            <p>Herramientas fundamentales para tu vida académica y profesional</p>
+  <section class="card" style="padding:22px;border-radius:12px;">
+    <form id="feedbackForm" class="feedback-form" novalidate>
+      <div class="form-row">
+        <label for="correo">Correo electrónico</label>
+        <input id="correo" name="correo" type="email" required placeholder="ejemplo@alumnos.udg.mx" aria-readonly="true">
         </div>
 
-        <div class="cards-container">
-            <div class="card">
-                <img src="./assets/office.png" alt="Logo Office" class="logo">
-                <h3>Microsoft Office 365</h3>
-                <p>Acceso gratuito a la suite completa: Word, Excel, PowerPoint, Outlook y Teams.</p>
-                <ul>
-                    <li><strong>Dispositivos:</strong> Instálalo hasta en 5 dispositivos.</li>
-                    <li><strong>Beneficio:</strong> Clave para trabajos, colaboración y clases virtuales.</li>
-                    <li>Tus accesos se encuentran en el apartado de Correo Office 365 en SIIAU. (Si no aparece, llena el siguiente formulario <a href="https://cgsait.udg.mx/office365/solicitud-office-365" target="_blank">https://cgsait.udg.mx/office365/solicitud-office-365</a>)</li>
-                </ul>
-                <a href="https://portal.office.com/" target="_blank" class="button primary">Ir al Portal de Instalación</a>
-            </div>
+      <div class="form-row">
+        <label for="area">Área o Módulo donde se encuentra el problema <small style="font-weight:700;color:#444">*</small></label>
+        <input id="area" name="area" type="text" required placeholder="Ejemplo: Módulo A">
+      </div>
 
-            <div class="card">
-                <img src="./assets/google.png" alt="Logo Google" class="logo">
-                <h3>Google Workspace (Drive, Meet, Classroom)</h3>
-                <p>Almacenamiento en la nube (limitado o ilimitado, según el convenio vigente) y herramientas de colaboración.</p>
-                <ul>
-                    <li><strong>Acceso:</strong> Con tu correo institucional <strong>@alumnos.udg.mx</strong>.</li>
-                    <li><strong>Beneficio:</strong> Google Meet, Google Classroom, Google Drive, Gmail, (cuenta oficial SIIAU ligado a clases).</li>
-                </ul>
-                <a href="http://gmail.com/" target="_blank" class="button primary">Gestionar mi Cuenta UDG</a>
-            </div>
+      <div class="form-row">
+        <label for="ubicacion">Ubicación específica <small style="font-weight:700;color:#444">*</small></label>
+        <input id="ubicacion" name="ubicacion" type="text" required placeholder="Ejemplo: Aula 21">
+      </div>
+
+      <fieldset style="border:0;padding:0;margin:0 0 12px 0;">
+        <legend style="font-weight:700;margin-bottom:6px;">Categoría de la falla <small style="font-weight:700;color:#444">*</small></legend>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+          <label><input type="radio" name="categoria" value="Eléctrica" required> Eléctrica</label>
+          <label><input type="radio" name="categoria" value="Mobiliario"> Mobiliario</label>
+          <label><input type="radio" name="categoria" value="Limpieza"> Limpieza</label>
+          <label><input type="radio" name="categoria" value="Infraestructura"> Infraestructura</label>
+          <label><input type="radio" name="categoria" value="Otro"> Otro</label>
+          <input id="categoria_otro" name="categoria_otro" type="text" placeholder="Especifica si elegiste Otro" style="display:none;margin-left:6px;">
         </div>
-    </section>
+      </fieldset>
 
-    <!-- Sección de Suscripción a la lista de difusión -->
-    <section id="suscripcion" class="section-subscribe">
-        <div class="container">
-            <h2>Únete a nuestra lista de difusión</h2>
-            <p>Recibe noticias y beneficios directamente en tu correo institucional.</p>
-              <div class="subscribe-grid">
-                <div class="subscribe-decor"> <!-- cuadrado gigante decorativo -->
-                    <div class="big-square">
-                        <div class="big-text">Beneficios UDG</div>
-                    </div>
-                    <!-- Decorativo compacto para móviles: una placa horizontal pequeña -->
-                    <div class="compact-decor" aria-hidden="true">
-                        <div class="compact-text">Beneficios UDG • Suscríbete</div>
-                    </div>
-                </div>
+      <div class="form-row">
+        <label for="descripcion">Descripción del problema <small style="font-weight:700;color:#444">*</small></label>
+        <textarea id="descripcion" name="descripcion" rows="6" required placeholder="Describe el problema con la mayor precisión posible"></textarea>
+      </div>
 
-                <form id="subscribeForm" action="https://script.google.com/macros/s/AKfycbwNE7eomL2tDZqEWcJ5lI3UuEcMs2Hb9h2ZeolvU5LhEevMV0k2_2O9xUFhOtp0FP7e/exec" method="post" target="iframeSub" novalidate>
-                <label for="email">Correo institucional</label>
-                <div class="subscribe-form-wrapper">
-                    <input id="email" name="email" type="email" placeholder="tu@alumnos.udg.mx" required aria-label="Correo institucional" pattern="^[^\s@]+@alumnos\.udg\.mx$" title="Usa tu correo institucional terminado en @alumnos.udg.mx">
-
-                    <button type="submit" class="button primary" aria-live="polite">
-                        <span class="btn-text">Suscribirme</span>
-                        <span class="btn-spinner" aria-hidden="true"></span>
-                    </button>
-                </div>
-
-                <!-- honeypot oculto para bots -->
-                <div style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;">
-                    <label>Si eres humano deja vacío:</label>
-                    <input name="hp" type="text" tabindex="-1" autocomplete="off">
-                </div>
-
-                <div class="checkbox">
-                    <input id="optin" name="optin" type="checkbox" required>
-                    <label for="optin">Acepto recibir correos informativos y ofertas</label>
-                </div>
-
-                <input type="hidden" name="source" value="github-pages">
-
-                <div id="subscribeMsg" class="subscribe-msg" aria-live="polite">
-                    <span class="msg-icon" aria-hidden="true"></span>
-                    <span class="msg-text">&nbsp;</span>
-                </div>
-            </form>
-
-            <iframe name="iframeSub" id="iframeSub" style="display:none;"></iframe>
+      <fieldset style="border:0;padding:0;margin:0 0 12px 0;">
+        <legend style="font-weight:700;margin-bottom:6px;">¿Cómo afecta este problema? <small style="font-weight:700;color:#444">*</small></legend>
+        <div class="checkbox-row" style="flex-wrap:wrap;gap:12px;">
+          <label><input type="checkbox" name="impact" value="Interrumpe clases"> Interrumpe clases</label>
+          <label><input type="checkbox" name="impact" value="Impide el uso del espacio"> Impide el uso del espacio</label>
+          <label><input type="checkbox" name="impact" value="Afecta la seguridad"> Afecta la seguridad</label>
+          <label><input type="checkbox" id="impact_none" name="impact" value="Ninguna"> Ninguna</label>
         </div>
-    </section>
+      </fieldset>
 
-    <!-- Sección de Beneficios por Tiempo Limitado -->
-    <section id="tiempo-limitado" class="limited-time-section">
-        <div class="limited-time-banner">
-            <div class="timer-animation">⏰</div>
-            <h2>🚀 Beneficios por Tiempo Limitado</h2>
-            <p class="countdown-text">¡Aprovecha estos beneficios especiales antes de que expiren!</p>
+      <div class="form-row">
+        <label for="evidence">Evidencia <small style="font-weight:700;color:#444">* (imagen, ≤10 MB)</small></label>
+        <input id="evidence" name="evidence" type="file" accept="image/*" required>
+        <div id="evidencePreviewWrap" style="margin-top:8px;display:none;"><img id="evidencePreview" src="" alt="Preview evidencia" style="max-width:220px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);" /></div>
+        <div id="evidenceNote" style="font-size:0.9rem;color:#666;margin-top:6px;">Sube 1 archivo compatible: imagen. Tamaño máximo: 10 MB.</div>
+      </div>
+
+      <fieldset style="border:0;padding:0;margin:0 0 12px 0;">
+        <legend style="font-weight:700;margin-bottom:6px;">Nivel de urgencia <small style="font-weight:700;color:#444">*</small></legend>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <label><input type="radio" name="urgencia" value="Baja" required> Baja (Estético / Menor)</label>
+          <label><input type="radio" name="urgencia" value="Media"> Media (Desgaste / Molestia)</label>
+          <label><input type="radio" name="urgencia" value="Alta"> Alta (Afecta Actividades)</label>
+          <label><input type="radio" name="urgencia" value="Urgente"> Urgente (Riesgo Inminente)</label>
         </div>
-        
-        <div class="limited-offers-grid">
-            <div class="limited-offer-card urgent">
-                <div class="urgency-badge">¡Urgente!</div>
-                <div class="offer-icon">🎯</div>
-                <h3>Adobe Creative Cloud - 63% Descuento</h3>
-                <p class="offer-description">Acceso completo a Photoshop, Illustrator, Premiere Pro y más.</p>
-                <div class="offer-details">
-                    <div class="original-price">Precio original: $949 MXN/mes</div>
-                    <div class="discount-price">Oferta especial: $349 MXN/mes</div>
-                    <div class="expiry-date">Vence: 30 de Septiembre 2025</div>
-                </div>
-                <a href="https://www.adobe.com/mx/creativecloud/buy/students.html?msockid=368ed243d9a465793a49c637d8c7648d" class="button primary pulse">Obtener Descuento</a>
-            </div>
+      </fieldset>
 
-            <div class="limited-offer-card moderate">
-                <div class="urgency-badge">Nuevo</div>
-                <div class="offer-icon">🤖</div>
-                <h3>Gemini Pro - Acceso Anual</h3>
-                <p class="offer-description">Plataforma de IA avanzada de Google para proyectos de investigación y desarrollo.</p>
-                <div class="offer-details">
-                    <div class="benefit-text">✅ Acceso gratuito por 1 año</div>
-                    <div class="benefit-text">✅ API para desarrolladores</div>
-                    <div class="benefit-text">✅ Integración con Google Workspace</div>
-                    <div class="expiry-date">Válido hasta: 3 de Noviembre 2025</div>
-                </div>
-                <a href="https://gemini.google/students/?gl=MX&hl=es-419" class="button secondary">Activar Licencia</a>
-            </div>
+      <div class="form-row checkbox-row">
+        <input id="consent" name="consent" type="checkbox" required>
+        <label for="consent">Autorizo que mi aporte sea registrado. No se comparte públicamente sin permiso.</label>
+      </div>
 
-            <div class="limited-offer-card standard">
-                <div class="urgency-badge">Renovación automática</div>
-                <div class="offer-icon">🎮</div>
-                <h3>Unity Pro - Estudiantes</h3>
-                <p class="offer-description">Plataforma de desarrollo de juegos y aplicaciones interactivas.</p>
-                <div class="offer-details">
-                    <div class="benefit-text">✅ Licencia gratuita hasta graduación</div>
-                    <div class="benefit-text">✅ Assets premium incluidos</div>
-                    <div class="expiry-date">Se renueva cada semestre</div>
-                </div>
-                <a href="https://unity.com/es/products/unity-student" class="button secondary">Registrarse</a>
-            </div>
-        </div>
+      <div class="form-row actions">
+        <button type="submit" class="button primary">Enviar</button>
+      </div>
 
-        <div class="limited-time-footer">
-            <p>💡 <strong>Consejo:</strong> Activa las notificaciones para recibir alertas sobre nuevos beneficios temporales.</p>
-            <button class="notification-button">🔔 Activar Notificaciones</button>
-        </div>
-    </section>
+      <div id="formMsg" class="subscribe-msg" aria-live="polite" style="margin-top:10px;"></div>
+    </form>
+  </section>
 
-    <section id="especializado" class="section-table">
-        <h2>🛠️ Software Especializado por Carrera/CU</h2>
-        <input type="text" id="filterInput" placeholder="Busca por Software o Carrera (ej. AutoCAD, CUCEI)">
-        
-        <table id="softwareTable">
-            <thead>
-                <tr>
-                    <th>Software</th>
-                    <th>Área / CU</th>
-                    <th>Licencia</th>
-                    <th>Instrucciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr data-carrera="Ingeniería" class="software-row">
-                    <td><strong>AutoCAD™ / Revit (Autodesk)</strong></td>
-                    <td>CUCEI, CUAAD</td>
-                    <td>Licencia Educativa Gratuita</td>
-                    <td>
-                        <button class="expand-button" data-software="AutoCAD" onclick="toggleDetails('AutoCAD', this)">▼ Ver Detalles</button>
-                    </td>
-                </tr>
-                <tr class="details-row" id="details-AutoCAD" style="display: none;">
-                    <td colspan="4">
-                        <div class="expanded-details">
-                            <div class="details-header">
-                                <h3>🏗️ AutoCAD™ / Revit (Autodesk) - Información Completa</h3>
-                            </div>
-                            
-                            <div class="details-grid">
-                                <div class="detail-section">
-                                    <h4>📋 Requisitos</h4>
-                                    <p>Debes ser un <strong>alumno activo</strong>, un <strong>académico</strong> o un <strong>administrativo</strong> de CUCEI.</p>
-                                </div>
-                                
-                                <div class="detail-section">
-                                    <h4>⏰ Duración</h4>
-                                    <p>La licencia es de <strong>un año</strong> y debe ser renovada anualmente.</p>
-                                </div>
-                                
-                                <div class="detail-section">
-                                    <h4>📞 Soporte Técnico</h4>
-                                    <p>Cualquier problema de instalación, acudir a:</p>
-                                    <div class="support-contacts">
-                                        <div class="contact-item">
-                                            <strong>🔧 Área de soporte técnico:</strong><br>
-                                            📞 +52 33 1378 5900 Ext. 27496<br>
-                                            📧 <a href="mailto:soporte@cucei.udg.mx">soporte@cucei.udg.mx</a>
-                                        </div>
-                                        <div class="contact-item">
-                                            <strong>🖥️ Área de servidores y correos:</strong><br>
-                                            📞 +52 33 1378 5900 Ext. 27414<br>
-                                            📧 <a href="mailto:servers.unix@cucei.udg.mx">servers.unix@cucei.udg.mx</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="detail-section downloads-section">
-                                    <h4>📁 Documentos y Guías</h4>
-                                    <div class="download-links">
-                                        <a href="./guias/guia_instalar_autocad.pdf" target="_blank" class="download-btn">
-                                            📄 Guía de Instalación (2.8 MB)
-                                        </a>
-                                        <a href="./guias/guia_renovar_licencia_autocad.pdf" target="_blank" class="download-btn">
-                                            🔄 Guía de Renovación (251 KB)
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr data-carrera="Ingeniería" class="software-row">
-                    <td><strong>SolidWorks™</strong></td>
-                    <td>CUCEI</td>
-                    <td>Licencia Institucional</td>
-                    <td>
-                        <button class="expand-button" data-software="SolidWorks" onclick="toggleDetails('SolidWorks', this)">▼ Ver Detalles</button>
-                    </td>
-                </tr>
-                <tr class="details-row" id="details-SolidWorks" style="display: none;">
-                    <td colspan="4">
-                        <div class="expanded-details">
-                            <div class="details-header">
-                                <h3>⚙️ SolidWorks™ - Software CAD Profesional</h3>
-                            </div>
-                            
-                            <div class="details-grid">
-                                <div class="detail-section">
-                                    <h4>📋 Descripción</h4>
-                                    <p><strong>Software CAD</strong> para modelado mecánico en <strong>2D y 3D</strong></p>
-                                    <p>CUCEI adquirió una licencia por contrato que nos permite tener hasta <strong>10,000 máquinas</strong> corriendo en forma simultánea el software para estudiantes y maestros.</p>
-                                </div>
-                                
-                                <div class="detail-section">
-                                    <h4>💻 Requisitos del Sistema</h4>
-                                    <p><strong>⚠️ Importante:</strong> Revisa si tu equipo cumple los requisitos en: 
-                                    <a href="https://www.solidworks.com/es/support/system-requirements" target="_blank">Requisitos del Sistema SolidWorks</a></p>
-                                    <ul class="requirements-list">
-                                        <li><strong>Sistema Operativo:</strong> Windows 7, 10 y 11 de 64 bits</li>
-                                        <li><strong>Restricción:</strong> No tener ninguna versión de Microsoft SQL Server previamente instalada</li>
-                                        <li><strong>Tarjeta Gráfica:</strong> Mínimo 2GB VRAM</li>
-                                    </ul>
-                                </div>
-                                
-                                <div class="detail-section">
-                                    <h4>🔧 Instalación</h4>
-                                    <div class="installation-info">
-                                        <p><strong>📍 Proceso de Activación:</strong></p>
-                                        <p>Debido a que cada licencia es activada de forma personal, deberás <strong>asistir a la CTA</strong> (Ubicada entre los módulos ALFA y BETA) <strong>con tu computadora</strong> para la activación del programa.</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="detail-section">
-                                    <h4>📞 Soporte Técnico</h4>
-                                    <p>Cualquier problema, acudir a:</p>
-                                    <div class="support-contacts">
-                                        <div class="contact-item">
-                                            <strong>🏢 Coordinación de Tecnologías de la Información (CTA)</strong><br>
-                                            <em>Ubicada entre los módulos ALFA y BETA</em>
-                                        </div>
-                                        <div class="contact-item">
-                                            <strong>🔧 Área de soporte técnico:</strong><br>
-                                            📞 +52 33 1378 5900 Ext. 27496<br>
-                                            📧 <a href="mailto:soporte@cucei.udg.mx">soporte@cucei.udg.mx</a>
-                                        </div>
-                                        <div class="contact-item">
-                                            <strong>🖥️ Área de servidores y correos:</strong><br>
-                                            📞 +52 33 1378 5900 Ext. 27414<br>
-                                            📧 <a href="mailto:servers.unix@cucei.udg.mx">servers.unix@cucei.udg.mx</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                
-                <tr data-carrera="Matemáticas" class="software-row">
-                    <td><strong>MATLAB</strong></td>
-                    <td>CUCEI, CUCSH</td>
-                    <td>Licencia Institucional</td>
-                    <td>
-                        <button class="expand-button" data-software="MATLAB" onclick="toggleDetails('MATLAB', this)">▼ Ver Detalles</button>
-                    </td>
-                </tr>
-                <tr class="details-row" id="details-MATLAB" style="display: none;">
-                    <td colspan="4">
-                        <div class="expanded-details">
-                            <div class="details-header">
-                                <h3>📊 MATLAB - Software de Análisis Matemático</h3>
-                            </div>
-                            
-                            <div class="details-grid">
-                                <div class="detail-section">
-                                    <h4>📋 Descripción</h4>
-                                    <p><strong>MATLAB</strong> es un software para el <strong>análisis iterativo</strong> y los <strong>procesos de diseño</strong> con un lenguaje de programación matemático directamente.</p>
-                                    <p>🎉 <strong>¡Excelente noticia!</strong> La Universidad firmó un convenio con <strong>MathWorks</strong> que permite que <strong>todos los estudiantes y profesores</strong> desde pregrado hasta posgrado puedan:</p>
-                                    <ul class="benefits-list">
-                                        <li>✅ Descargar e instalar <strong>MATLAB</strong> completamente gratis</li>
-                                        <li>✅ Acceder a <strong>todos los toolboxes</strong> desarrollados</li>
-                                        <li>✅ Instalarlo <strong>cuantas veces lo necesiten</strong></li>
-                                        <li>✅ Disponible para <strong>pregrado y posgrado</strong></li>
-                                    </ul>
-                                </div>
-                                
-                                <div class="detail-section">
-                                    <h4>📥 Descarga e Instalación</h4>
-                                    <div class="download-info">
-                                        <p><strong>📧 Requisitos:</strong></p>
-                                        <p>Deberás tener a la mano tu <strong>correo académico</strong> (ya sea el de Google o el de Microsoft)</p>
-                                        
-                                        <p><strong>🌐 Acceso al Portal:</strong></p>
-                                        <div class="matlab-access">
-                                            <a href="https://la.mathworks.com/academia/tah-portal/universidad-de-guadalajara-31544721.html" target="_blank">
-                                                🔗 Portal MATLAB UDG - MathWorks
-                                            </a>
-                                            <p><em>La guia de instalación se encuentra disponible en el siguiente link <a href="https://www.cucei.udg.mx/herramientas-tecnologicas/licenciamiento-de-software/mathlab" target="_blank">Guía de Instalación MATLAB</a></em></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="detail-section">
-                                    <h4>👥 Beneficiarios</h4>
-                                    <div class="beneficiaries-info">
-                                        <div class="beneficiary-item">
-                                            <strong>🎓 Estudiantes:</strong> Desde pregrado hasta posgrado
-                                        </div>
-                                        <div class="beneficiary-item">
-                                            <strong>👨‍🏫 Profesores:</strong> Todo el personal académico
-                                        </div>
-                                        <div class="beneficiary-item">
-                                            <strong>🏫 Centros:</strong> CUCEI, CUCSH y todos los CU
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="detail-section">
-                                    <h4>🛠️ Incluye</h4>
-                                    <div class="toolboxes-info">
-                                        <p><strong>Software completo:</strong></p>
-                                        <ul class="toolboxes-list">
-                                            <li>📊 MATLAB (software base)</li>
-                                            <li>🧰 Todos los toolboxes disponibles</li>
-                                            <li>📚 Documentación completa</li>
-                                            <li>🔄 Actualizaciones automáticas</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                
-                <tr data-carrera="Estadística" class="software-row">
-                    <td><strong>StatGraphics™</strong></td>
-                    <td>CUCEI, CUCEA</td>
-                    <td>Licencia Educativa</td>
-                    <td>
-                        <button class="expand-button" data-software="StatGraphics" onclick="toggleDetails('StatGraphics', this)">▼ Ver Detalles</button>
-                    </td>
-                </tr>
-                <tr class="details-row" id="details-StatGraphics" style="display: none;">
-                    <td colspan="4">
-                        <div class="expanded-details">
-                            <div class="details-header">
-                                <h3>📈 StatGraphics™ - Software de Análisis Estadístico</h3>
-                            </div>
-                            
-                            <div class="details-grid">
-                                <div class="detail-section">
-                                    <h4>📋 Descripción</h4>
-                                    <p><strong>StatGraphics™</strong> es un software especializado en <strong>análisis estadístico</strong> y <strong>visualización de datos</strong>, ideal para investigación académica y análisis de datos profesional.</p>
-                                </div>
-                                
-                                <div class="detail-section">
-                                    <h4>📥 Descarga e Instalación</h4>
-                                    <div class="download-info">
-                                        <p><strong>🔗 Paso 1 - Descarga:</strong></p>
-                                        <div class="statgraphics-access">
-                                            <a href="https://statgraphics.com/download19" target="_blank">
-                                                💾 Descargar StatGraphics™
-                                            </a>
-                                            <p><em>La guia de instalación se encuentra disponible en el siguiente link <a href="https://www.cucei.udg.mx/herramientas-tecnologicas/licenciamiento-de-software/statgraphics" target="_blank">Guía de Instalación StatGraphics™</a></em></p>
-                                        </div>
-                                        
-                                        <div class="version-warning">
-                                            <h5>⚠️ Importante - Versión Recomendada</h5>
-                                            <p><strong>Utiliza la versión de 32 bits</strong> para evitar errores de compatibilidad con el sistema.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="detail-section">
-                                    <h4>🎯 Características</h4>
-                                    <div class="features-info">
-                                        <ul class="features-list">
-                                            <li>📊 Análisis estadístico avanzado</li>
-                                            <li>📈 Visualización de datos profesional</li>
-                                            <li>🔍 Herramientas de investigación académica</li>
-                                            <li>📋 Reportes estadísticos detallados</li>
-                                            <li>🌍 Disponible en múltiples idiomas</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="detail-section">
-                                    <h4>🎓 Ideal para</h4>
-                                    <div class="ideal-for-info">
-                                        <div class="ideal-item">
-                                            <strong>📚 Estudiantes:</strong> Análisis de datos en tesis e investigaciones
-                                        </div>
-                                        <div class="ideal-item">
-                                            <strong>👨‍🏫 Profesores:</strong> Investigación académica y enseñanza
-                                        </div>
-                                        <div class="ideal-item">
-                                            <strong>🔬 Investigadores:</strong> Análisis estadístico profesional
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
 
-                <tr data-carrera="Desarrollo" class="software-row">
-                    <td><strong>JetBrains IDE Suite</strong></td>
-                    <td>Todas las carreras</td>
-                    <td>Licencia Educativa Gratuita</td>
-                    <td>
-                        <button class="expand-button" data-software="JetBrains" onclick="toggleDetails('JetBrains', this)">▼ Ver Detalles</button>
-                    </td>
-                </tr>
-                <tr class="details-row" id="details-JetBrains" style="display: none;">
-                    <td colspan="4">
-                        <div class="expanded-details">
-                            <div class="details-header">
-                                <h3>💻 JetBrains IDE Suite - Herramientas de Desarrollo Profesional</h3>
-                            </div>
-                            
-                            <div class="details-grid">
-                                <div class="detail-section">
-                                    <h4>📋 Descripción</h4>
-                                    <p>Acceso gratuito a <strong>todos los IDEs profesionales</strong> de JetBrains, las herramientas preferidas por desarrolladores profesionales en todo el mundo.</p>
-                                </div>
-                                
-                                <div class="detail-section">
-                                    <h4>🛠️ IDEs Incluidos</h4>
-                                    <ul class="jetbrains-list">
-                                        <li><strong>IntelliJ IDEA Ultimate:</strong> Java, Kotlin, Scala</li>
-                                        <li><strong>PyCharm Professional:</strong> Python, Django, Flask</li>
-                                        <li><strong>WebStorm:</strong> JavaScript, TypeScript, React</li>
-                                        <li><strong>PhpStorm:</strong> PHP, Laravel, Symfony</li>
-                                        <li><strong>CLion:</strong> C/C++, CMake</li>
-                                        <li><strong>DataGrip:</strong> Bases de datos</li>
-                                        <li><strong>Rider:</strong> .NET, Unity</li>
-                                    </ul>
-                                </div>
-                                
-                                <div class="detail-section">
-                                    <h4>📥 Activación</h4>
-                                    <div class="jetbrains-access">
-                                        <p><strong>🎓 Requisitos:</strong></p>
-                                        <ul>
-                                            <li>Correo institucional activo (@alumnos.udg.mx)</li>
-                                            <li>Verificación de estatus estudiantil</li>
-                                        </ul>
-                                        <a href="https://www.jetbrains.com/student/" target="_blank">
-                                            🔗 Solicitar Licencia Educativa JetBrains
-                                        </a>
-                                    </div>
-                                </div>
-                                
-                                <div class="detail-section">
-                                    <h4>⏱️ Duración y Renovación</h4>
-                                    <p><strong>Duración:</strong> 1 año renovable automáticamente</p>
-                                    <p><strong>Renovación:</strong> Se renueva cada año mientras seas estudiante activo</p>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+  <footer style="text-align:center;margin-top:22px;color:#f9f7f7;font-size:.9rem;">
+    <p>Si necesitas ayuda manda un correo a ayuda@diferente.email</p>
+    <p>© Diferente</p>
+  </footer>
+  </main>
 
-                <tr data-carrera="Visualización" class="software-row">
-                    <td><strong>Tableau Desktop</strong></td>
-                    <td>CUCEA, CUCEI, CUCSH</td>
-                    <td>Licencia Educativa Gratuita</td>
-                    <td>
-                        <button class="expand-button" data-software="Tableau" onclick="toggleDetails('Tableau', this)">▼ Ver Detalles</button>
-                    </td>
-                </tr>
-                <tr class="details-row" id="details-Tableau" style="display: none;">
-                    <td colspan="4">
-                        <div class="expanded-details">
-                            <div class="details-header">
-                                <h3>📊 Tableau Desktop - Visualización Profesional de Datos</h3>
-                            </div>
-                            
-                            <div class="details-grid">
-                                <div class="detail-section">
-                                    <h4>📋 Descripción</h4>
-                                    <p><strong>Tableau Desktop</strong> es la herramienta líder mundial para <strong>visualización y análisis de datos</strong>. Permite crear dashboards interactivos y análisis profesionales.</p>
-                                </div>
-                                
-                                <div class="detail-section">
-                                    <h4>🎯 Características Principales</h4>
-                                    <ul class="tableau-features">
-                                        <li>📈 Visualizaciones interactivas avanzadas</li>
-                                        <li>🔗 Conexión a múltiples fuentes de datos</li>
-                                        <li>📊 Dashboards profesionales</li>
-                                        <li>🤖 Análisis predictivo y estadístico</li>
-                                        <li>☁️ Integración con Tableau Cloud</li>
-                                    </ul>
-                                </div>
-                                
-                                <div class="detail-section">
-                                    <h4>📥 Solicitud de Licencia</h4>
-                                    <div class="tableau-access">
-                                        <p><strong>🎓 Proceso:</strong></p>
-                                        <ol>
-                                            <li>Registrarse con correo institucional</li>
-                                            <li>Verificar estatus de estudiante</li>
-                                            <li>Descargar e instalar Tableau Desktop</li>
-                                        </ol>
-                                        <a href="https://www.tableau.com/academic/students" target="_blank">
-                                            🔗 Solicitar Licencia Tableau for Students
-                                        </a>
-                                    </div>
-                                </div>
-                                
-                                <div class="detail-section">
-                                    <h4>🎓 Ideal para</h4>
-                                    <div class="tableau-ideal">
-                                        <div class="ideal-item">
-                                            <strong>📊 Análisis de Datos:</strong> Investigación académica y tesis
-                                        </div>
-                                        <div class="ideal-item">
-                                            <strong>💼 Business Intelligence:</strong> Proyectos empresariales
-                                        </div>
-                                        <div class="ideal-item">
-                                            <strong>📈 Reportes:</strong> Presentaciones profesionales
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-        </table>
-    </section>
-
-    <!-- Sección de Beneficios Adicionales -->
-    <section id="beneficios-adicionales" class="section-cards">
-        <div class="card title-card">
-            <h2>🌟 Beneficios Adicionales y Descuentos</h2>
-            <p>Aprovecha estos increíbles descuentos y beneficios exclusivos para estudiantes</p>
-        </div>
-
-        <div class="cards-container">
-            <div class="card">
-                <img src="./assets/github-icon-1.svg" alt="Logo GitHub" class="logo">
-                <h3>GitHub Student Developer Pack</h3>
-                <p>Acceso gratuito a GitHub Pro, repositorios privados ilimitados y más de 100 herramientas de desarrollo.</p>
-                <ul>
-                    <li><strong>Incluye:</strong> GitHub Pro, Copilot, Actions ilimitadas</li>
-                    <li><strong>Valor:</strong> Más de $200,000 USD en herramientas</li>
-                    <li><strong>Duración:</strong> Mientras seas estudiante</li>
-                </ul>
-                <a href="https://education.github.com/pack" target="_blank" class="button primary">Obtener Pack Gratuito</a>
-            </div>
-
-            <div class="card">
-                <img src="./assets/jetbrains-1.svg" alt="Logo JetBrains" class="logo">
-                <h3>JetBrains IDE Suite</h3>
-                <p>Acceso gratuito a todos los IDEs profesionales de JetBrains incluido en GitHub Student Pack.</p>
-                <ul>
-                    <li><strong>Incluye:</strong> IntelliJ IDEA, PyCharm, WebStorm</li>
-                    <li><strong>Beneficio:</strong> Herramientas de desarrollo profesional</li>
-                    <li><strong>Renovación:</strong> Anual con verificación estudiantil</li>
-                </ul>
-                <a href="https://www.jetbrains.com/student/" target="_blank" class="button primary">Activar Licencia</a>
-            </div>
-
-            <div class="card">
-                <img src="./assets/notion-2.svg" alt="Logo Notion" class="logo">
-                <h3>Notion Education Plus</h3>
-                <p>Plan educativo premium de Notion con funciones avanzadas para estudiantes y educadores.</p>
-                <ul>
-                    <li><strong>Incluye:</strong> Workspace ilimitado, colaboración avanzada</li>
-                    <li><strong>Beneficio:</strong> Organización total de tu vida académica</li>
-                    <li><strong>Acceso:</strong> Con correo institucional</li>
-                </ul>
-                <a href="https://www.notion.so/product/notion-for-education" target="_blank" class="button primary">Obtener Plan Educativo</a>
-            </div>
-
-            <div class="card">
-                <img src="./assets/figma-icon.svg" alt="Logo Figma" class="logo">
-                <h3>Figma Professional</h3>
-                <p>Plan profesional de Figma disponible con tu correo universitario para diseño y prototipado.</p>
-                <ul>
-                    <li><strong>Incluye:</strong> Proyectos ilimitados, colaboración en tiempo real</li>
-                    <li><strong>Beneficio:</strong> Herramienta estándar de la industria UI/UX</li>
-                    <li><strong>Duración:</strong> Mientras tengas correo .edu</li>
-                </ul>
-                <a href="https://www.figma.com/education/" target="_blank" class="button primary">Activar Plan Educativo</a>
-            </div>
-
-            <div class="card">
-                <img src="./assets/perplexity-3.svg" alt="Logo Perplexity" class="logo">
-                <h3>Perplexity Pro para Estudiantes</h3>
-                <p>1 año gratis de Perplexity Pro para estudiantes con búsqueda AI avanzada y análisis profundo.</p>
-                <ul>
-                    <li><strong>Incluye:</strong> Búsqueda AI ilimitada, GPT-4, Claude</li>
-                    <li><strong>Beneficio:</strong> Investigación académica potenciada por IA</li>
-                    <li><strong>Valor:</strong> $200 USD anuales completamente gratis</li>
-                </ul>
-                <a href="https://www.perplexity.ai/pro?referral_code=STUDENT2024" target="_blank" class="button primary">Obtener 1 Año Gratis</a>
-            </div>
-
-            <div class="card">
-                <img src="./assets/spotify-2.svg" alt="Logo Spotify" class="logo">
-                <h3>Spotify Premium Student</h3>
-                <p>50% de descuento en Spotify Premium para estudiantes universitarios verificados.</p>
-                <ul>
-                    <li><strong>Precio:</strong> $74 MXN/mes (precio regular $139)</li>
-                    <li><strong>Incluye:</strong> Sin anuncios, descargas offline</li>
-                    <li><strong>Verificación:</strong> Cada 12 meses</li>
-                </ul>
-                <a href="https://www.spotify.com/mx/student/" target="_blank" class="button primary">Obtener Descuento</a>
-            </div>
-
-            <div class="card">
-                <img src="./assets/azure-2.svg" alt="Logo Azure" class="logo">
-                <h3>Microsoft Azure for Students</h3>
-                <p>Créditos gratuitos de $100 USD y servicios en la nube para estudiantes sin necesidad de tarjeta.</p>
-                <ul>
-                    <li><strong>Créditos:</strong> $100 USD para usar en 12 meses</li>
-                    <li><strong>Servicios:</strong> VMs, bases de datos, AI/ML</li>
-                    <li><strong>Sin costo:</strong> No requiere tarjeta de crédito</li>
-                </ul>
-                <a href="https://azure.microsoft.com/es-mx/free/students/" target="_blank" class="button primary">Activar Azure</a>
-            </div>
-
-            <div class="card">
-                <img src="./assets/amazon-prime-video-1.svg" alt="Logo Amazon" class="logo">
-                <h3>Amazon Prime Student</h3>
-                <p>50% de descuento en Amazon Prime para estudiantes universitarios con todos los beneficios.</p>
-                <ul>
-                    <li><strong>Precio:</strong> $49 MXN/mes (precio regular $99)</li>
-                    <li><strong>Incluye:</strong> Envío gratis, Prime Video, Prime Music</li>
-                    <li><strong>Duración:</strong> Hasta 4 años o graduación</li>
-                </ul>
-                <a href="https://www.amazon.com.mx/amazonprime?_encoding=UTF8&%2AVersion%2A=1&%2Aentries%2A=0&planOptimizationId=WLPStudentMonthly" target="_blank" class="button primary">Obtener Prime Student</a>
-            </div>
-
-            <div class="card">
-                <img src="./assets/apple-13.svg" alt="Logo Apple" class="logo">
-                <h3>Apple Store - Descuentos Estudiantes</h3>
-                <p>Descuentos especiales en MacBook, iPad y otros productos Apple para estudiantes y educadores verificados.</p>
-                <ul>
-                    <li><strong>MacBook:</strong> Hasta $3,000 MXN de descuento</li>
-                    <li><strong>iPad:</strong> Hasta $1,500 MXN de descuento</li>
-                    <li><strong>Incluye:</strong> AirPods gratis con MacBook o iPad</li>
-                </ul>
-                <a href="https://www.apple.com/mx-edu/store" target="_blank" class="button primary">Ver Descuentos Apple</a>
-            </div>
-
-            <div class="card">
-                <img src="./assets/cursor-app-icon.webp" alt="Logo Cursor" class="logo">
-                <h3>Cursor AI Editor</h3>
-                <p>Editor de código con IA integrada disponible para estudiantes con email .edu - El futuro de la programación.</p>
-                <ul>
-                    <li><strong>Incluye:</strong> Autocompletado con IA, chat integrado</li>
-                    <li><strong>Beneficio:</strong> Programación asistida por IA avanzada</li>
-                    <li><strong>Gratis:</strong> Para estudiantes con correo .edu</li>
-                </ul>
-                <a href="https://cursor.sh/pricing" target="_blank" class="button primary">Obtener Cursor Pro</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="faq" class="section-faq">
-        <h2>❓ Preguntas Frecuentes</h2>
-        <h3>Puedes enviarnos un correo electronico a ayuda@diferente.email ante cualquier duda</h3>
-        <details>
-            <summary>¿Cómo obtengo mi correo institucional UDG?</summary>
-            <p>Se genera automáticamente al obtener tu código de estudiante (SIIAU). Dentro de SIIAU apareceran dos apartados, Correo Google y Correo Office 365, en ambos apareceran tu correo y tu contraseña temporal que debe ser cambiada al iniciar sesión.</p>
-        </details>
-        <details>
-            <summary>¿Qué hago si mi licencia de Office me pide pago?</summary>
-            <p>Asegúrate de haber iniciado sesión con el formato de correo correcto (el correo tiene el formato de `codigo@alumno.udg.mx`) y revisa el estado de tu matrícula.</p>
-        </details>
-        <details>
-            <summary>¿Que pasa si no me aparece mi correo de Office en SIIAU?</summary>
-            <p>Para obtener una cuenta de UDGLive deberás solicitarlo con tu nombre, código, centro universitario o prepa y tu carrera a este formulario: <a href="https://cgsait.udg.mx/office365/solicitud-office-365" target="_blank">https://cgsait.udg.mx/office365/solicitud-office-365</a></p>
-        </details>
-    </section>
-
-    <footer>
-        <p>Actualizado: Septiembre 2025 | Proyecto Estudiantil sin fines de lucro. Los logos y marcas pertenecen a sus respectivos dueños.</p>
-    </footer>
-
-    <script src="scripts.js"></script>
+  <script src="scripts.js"></script>
 </body>
 </html>

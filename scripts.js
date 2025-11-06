@@ -1,292 +1,186 @@
-// Función global para manejar la expansión
-function toggleDetails(softwareName, buttonElement) {
-    console.log('toggleDetails llamada desde onclick:', softwareName, buttonElement);
-    
-    const detailsRow = document.getElementById(`details-${softwareName}`);
-    console.log('Fila encontrada:', detailsRow);
-    
-    if (detailsRow) {
-        const isHidden = detailsRow.style.display === 'none' || 
-                       detailsRow.style.display === '' || 
-                       getComputedStyle(detailsRow).display === 'none';
-        
-        console.log('Estado actual - isHidden:', isHidden);
-        
-        if (isHidden) {
-            // Expandir
-            console.log('Expandiendo...');
-            detailsRow.style.display = 'table-row';
-            detailsRow.classList.add('show');
-            buttonElement.innerHTML = '▲ Ocultar Detalles';
-            buttonElement.classList.add('expanded');
-            
-            // Scroll suave hacia la fila expandida
-            setTimeout(() => {
-                detailsRow.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'center' 
-                });
-            }, 300);
-        } else {
-            // Contraer
-            console.log('Contrayendo...');
-            detailsRow.style.display = 'none';
-            detailsRow.classList.remove('show');
-            buttonElement.innerHTML = '▼ Ver Detalles';
-            buttonElement.classList.remove('expanded');
-        }
-    } else {
-        console.error('No se encontró la fila de detalles para:', softwareName);
-        alert('Error: No se pudo encontrar la información detallada');
-    }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM cargado, iniciando scripts...');
-    // --- Limpieza cliente: borrar cookies, caches y service workers para evitar contenido cacheado ---
-    (async function clearClientStorageAndUnregisterServiceWorkers(){
-        try {
-            // borrar cookies (establecer expiración pasada)
-            document.cookie.split(';').forEach(function(c) {
-                document.cookie = c.replace(/=.*/, '=;expires=' + new Date(0).toUTCString() + ';path=/');
-            });
 
-            // limpiar localStorage y sessionStorage
-            try { localStorage.clear(); } catch(e){/* no-op */}
-            try { sessionStorage.clear(); } catch(e){/* no-op */}
+  const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzlOMuq97AzG5a3ycx9z_pQqQwGgMuPYgxlQHqY2BcLkDWoyaBhFO8a2O1VsBaPDlzO4g/exec';
 
-            // borrar caches (Cache API)
-            if ('caches' in window) {
-                const keys = await caches.keys();
-                await Promise.all(keys.map(k => caches.delete(k)));
-            }
+  const form = document.getElementById('feedbackForm');
+  const msgEl = document.getElementById('formMsg');
 
-            // unregister service workers
-            if ('serviceWorker' in navigator) {
-                const regs = await navigator.serviceWorker.getRegistrations();
-                await Promise.all(regs.map(r => r.unregister()));
-            }
+  const inputCorreo = document.getElementById('correo');
+  const inputArea = document.getElementById('area');
+  const inputUbic = document.getElementById('ubicacion');
+  const categoriaRadios = Array.from(document.querySelectorAll('input[name="categoria"]'));
+  const categoriaOtro = document.getElementById('categoria_otro');
+  const descripcion = document.getElementById('descripcion');
+  const impactChecks = Array.from(document.querySelectorAll('input[name="impact"]'));
+  const impactNone = document.getElementById('impact_none');
+  const evidenceInput = document.getElementById('evidence');
+  const evidencePreviewWrap = document.getElementById('evidencePreviewWrap');
+  const evidencePreview = document.getElementById('evidencePreview');
+  const urgenciaRadios = Array.from(document.querySelectorAll('input[name="urgencia"]'));
 
-            console.info('Client caches, cookies and service workers cleared.');
-        } catch (err) {
-            console.warn('Error clearing client storages:', err);
-        }
-    })();
-    
-    const filterInput = document.getElementById('filterInput');
-    const softwareTable = document.getElementById('softwareTable');
-    const rows = softwareTable ? softwareTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr') : [];
-    
-    console.log('Elementos encontrados:', {
-        filterInput: !!filterInput,
-        softwareTable: !!softwareTable,
-        rowsCount: rows.length
-    });
-
-    // Funcionalidad del filtro
-    if (filterInput && softwareTable) {
-        filterInput.addEventListener('keyup', function() {
-            const filter = filterInput.value.toLowerCase();
-            
-            for (let i = 0; i < rows.length; i++) {
-                // Solo procesar filas que no sean de detalles
-                if (!rows[i].classList.contains('details-row')) {
-                    const rowText = rows[i].textContent.toLowerCase();
-                    const carrera = rows[i].getAttribute('data-carrera') || '';
-                    
-                    // Mostrar u ocultar la fila
-                    if (rowText.includes(filter) || carrera.toLowerCase().includes(filter)) {
-                        rows[i].style.display = "";
-                    } else {
-                        rows[i].style.display = "none";
-                    }
-                }
-            }
-        });
-    }
-
-    // Manejar otros botones de detalles que no tengan expansión específica
-    document.querySelectorAll('.details-button:not(.expand-button)').forEach(button => {
-        button.addEventListener('click', (event) => {
-            const softwareName = event.target.getAttribute('data-software');
-            alert(`Instrucciones para ${softwareName}:\n\nPor favor, contacta a la coordinación de tu Centro Universitario para más información sobre licencias y acceso.`);
-        });
-    });
-
-    // Funcionalidad para el botón de notificaciones de tiempo limitado
-    const notificationButton = document.querySelector('.notification-button');
-    if (notificationButton) {
-        notificationButton.addEventListener('click', () => {
-            // Verificar si el navegador soporta notificaciones
-            if ("Notification" in window) {
-                // Solicitar permiso para notificaciones
-                Notification.requestPermission().then(permission => {
-                    if (permission === "granted") {
-                        notificationButton.innerHTML = "✅ Notificaciones Activadas";
-                        notificationButton.style.background = "linear-gradient(45deg, #27ae60, #2ecc71)";
-                        
-                        // Mostrar notificación de confirmación
-                        new Notification("¡Notificaciones Activadas!", {
-                            body: "Te notificaremos sobre nuevos beneficios por tiempo limitado",
-                            icon: "./assets/udg-logo.png"
-                        });
-                        
-                        // Simular notificación programada (ejemplo)
-                        setTimeout(() => {
-                            new Notification("🚀 Nuevo Beneficio Disponible", {
-                                body: "¡Revisa las nuevas ofertas de software por tiempo limitado!",
-                                icon: "./assets/udg-logo.png"
-                            });
-                        }, 10000); // 10 segundos después
-                        
-                    } else if (permission === "denied") {
-                        alert("Las notificaciones han sido bloqueadas. Puedes habilitarlas en la configuración de tu navegador.");
-                    }
-                });
-            } else {
-                alert("Tu navegador no soporta notificaciones.");
-            }
-        });
-    }
-});
-
-// Escucha postMessage desde el iframe con la respuesta del Web App (suscripción)
-window.addEventListener('message', function(ev) {
-    console.log('postMessage recibido desde iframe:', ev.origin, ev.source);
-    let data = ev.data;
-    try {
-        if (typeof data === 'string') data = JSON.parse(data);
-    } catch (e) {
-        console.warn('Mensaje no JSON en postMessage:', ev.data);
-        return;
-    }
-
-    // Integración con la UI: quitar estado de loading y mostrar mensaje bonito
-    const msgEl = document.getElementById('subscribeMsg');
-    const form = document.getElementById('subscribeForm');
-    if (form && form._subscribeTimeout) {
-        clearTimeout(form._subscribeTimeout);
-        form._subscribeTimeout = null;
-    }
-
-    // quitar loading del botón
-    if (form) {
-        const submitBtn = form.querySelector('button[type="submit"]');
-        if (submitBtn) {
-            submitBtn.classList.remove('btn-loading');
-            submitBtn.disabled = false;
-        }
-    }
-
+  function showMessage(text, ok = true, persistMs = 7000) {
     if (!msgEl) return;
+    msgEl.classList.remove('msg-success', 'msg-error', 'msg-fade-in');
+    msgEl.classList.add(ok ? 'msg-success' : 'msg-error', 'msg-fade-in');
+    msgEl.textContent = text;
+    clearTimeout(form._msgTimeout);
+    form._msgTimeout = setTimeout(() => {
+      msgEl.textContent = '';
+      msgEl.classList.remove('msg-success', 'msg-error', 'msg-fade-in');
+    }, persistMs);
+  }
 
-    // mostrar mensaje con clases
-    const icon = msgEl.querySelector('.msg-icon');
-    const text = msgEl.querySelector('.msg-text');
-    msgEl.classList.remove('msg-success','msg-error','msg-fade-in');
-    if (data && data.ok) {
-        msgEl.classList.add('msg-success','msg-fade-in');
-        if (text) text.textContent = data.msg || 'Guardado correctamente.';
-        if (form) form.reset();
+  function getSelectedRadioValue(radios) {
+    const r = radios.find(x => x.checked);
+    return r ? r.value : '';
+  }
+
+  // Mostrar/ocultar input "Otro" para categoría
+  categoriaRadios.forEach(r => r.addEventListener('change', () => {
+    if (r.checked && r.value === 'Otro') {
+      categoriaOtro.style.display = '';
+      categoriaOtro.required = true;
+      categoriaOtro.focus();
+    } else if (r.checked) {
+      categoriaOtro.style.display = 'none';
+      categoriaOtro.required = false;
+      categoriaOtro.value = '';
+    }
+  }));
+
+  // Lógica de impactos (Ninguna exclusiva)
+  impactChecks.forEach(ch => ch.addEventListener('change', () => {
+    if (ch === impactNone) {
+      if (impactNone.checked) impactChecks.forEach(c => { if (c !== impactNone) c.checked = false; });
     } else {
-        msgEl.classList.add('msg-error','msg-fade-in');
-        if (text) text.textContent = (data && data.msg) ? data.msg : 'Ocurrió un error. Intenta más tarde.';
+      if (ch.checked) impactNone.checked = false;
+    }
+  }));
+
+  // Preview y validación del archivo
+  evidenceInput.addEventListener('change', () => {
+    const f = evidenceInput.files && evidenceInput.files[0];
+    if (!f) { evidencePreviewWrap.style.display = 'none'; return; }
+    const max = 10 * 1024 * 1024; // 10MB
+    if (!f.type.startsWith('image/')) {
+      showMessage('Archivo no compatible. Selecciona una imagen.', false);
+      evidenceInput.value = '';
+      evidencePreviewWrap.style.display = 'none';
+      return;
+    }
+    if (f.size > max) {
+      showMessage('El archivo supera 10 MB. Selecciona uno más pequeño.', false);
+      evidenceInput.value = '';
+      evidencePreviewWrap.style.display = 'none';
+      return;
     }
 
-    // auto-limpiar
-    if (form) {
-        clearTimeout(form._msgClearTimeout);
-        form._msgClearTimeout = setTimeout(() => {
-            if (text) text.textContent = '';
-            msgEl.classList.remove('msg-success','msg-error','msg-fade-in');
-        }, 8000);
-    }
-});
+    const reader = new FileReader();
+    reader.onload = () => {
+      evidencePreview.src = reader.result;
+      evidencePreviewWrap.style.display = '';
+      evidenceInput._dataUrl = reader.result;
+      evidenceInput._file = f;
+    };
+    reader.readAsDataURL(f);
+  });
 
-// DEBUG: comprobar que el formulario tiene una URL válida
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('subscribeForm');
-    if (!form) return;
-    form.addEventListener('submit', () => {
-        console.log('subscribeForm submit -> action=', form.action);
+  async function readFileAsDataURL(file) {
+    return new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(r.result);
+      r.onerror = () => reject(new Error('No se pudo leer el archivo'));
+      r.readAsDataURL(file);
     });
-    // Constante con la URL real del Web App (usar para pruebas locales y referencias consistentes)
-    const SUBSCRIBE_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwNE7eomL2tDZqEWcJ5lI3UuEcMs2Hb9h2ZeolvU5LhEevMV0k2_2O9xUFhOtp0FP7e/exec';
+  }
 
-    // Si el atributo action está vacío o contiene el placeholder, lo inicializamos para pruebas locales
-    const msgEl = document.getElementById('subscribeMsg');
-    if (!form.action || form.action.includes('TU_WEBAPP_URL_AQUI') || form.action.includes('TU-WEBAPP-URL')) {
-        console.info('subscribeForm action vacío o con placeholder — asignando SUBSCRIBE_WEBAPP_URL para pruebas locales');
-        form.action = SUBSCRIBE_WEBAPP_URL;
-        if (msgEl) {
-            msgEl.style.color = 'orange';
-            msgEl.textContent = '⚠️ Acción del formulario auto-configurada para pruebas locales.';
-        }
-    } else if (form.action !== SUBSCRIBE_WEBAPP_URL) {
-        // Si el action está presente y es distinto al valor esperado, solo registrarlo (no sobrescribir)
-        console.log('subscribeForm action detectado:', form.action);
-    } else {
-        // action ya apunta a la URL esperada
-        console.log('subscribeForm action configurado correctamente');
+  async function sendToWebApp(payload) {
+    if (!WEBAPP_URL) return { ok: false, msg: 'WEBAPP_URL no configurada' };
+    try {
+        const res = await fetch(WEBAPP_URL, {
+          method: 'POST',
+          mode: 'cors',
+          body: JSON.stringify(payload)
+        });
+      const text = await res.text();
+      try { return { ok: true, data: JSON.parse(text) }; } catch (e) { return { ok: true, data: text }; }
+    } catch (err) {
+      console.warn('Error enviando al WebApp:', err);
+      return { ok: false, msg: String(err) };
     }
-    
-    // Mejora UX: validar email en cliente y mostrar spinner mientras se envía
-    const emailInput = document.getElementById('email');
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const spinner = submitBtn ? submitBtn.querySelector('.btn-spinner') : null;
-    const btnText = submitBtn ? submitBtn.querySelector('.btn-text') : null;
+  }
 
-    function setLoading(on) {
-        if (!submitBtn) return;
-        if (on) {
-            submitBtn.classList.add('btn-loading');
-            submitBtn.disabled = true;
-        } else {
-            submitBtn.classList.remove('btn-loading');
-            submitBtn.disabled = false;
-        }
+  form.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+
+  // Validaciones
+    if (!inputArea.value.trim()) { showMessage('Completa el área o módulo.', false); inputArea.focus(); return; }
+    if (!inputUbic.value.trim()) { showMessage('Completa la ubicación específica.', false); inputUbic.focus(); return; }
+
+    const categoria = getSelectedRadioValue(categoriaRadios);
+    if (!categoria) { showMessage('Selecciona la categoría de la falla.', false); return; }
+    let categoriaFinal = categoria;
+    if (categoria === 'Otro') {
+      if (!categoriaOtro.value.trim()) { showMessage('Especifica la categoría en "Otro".', false); categoriaOtro.focus(); return; }
+      categoriaFinal = categoriaOtro.value.trim();
     }
 
-    // Client-side simple email regex
-    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    form.addEventListener('submit', (ev) => {
-        const email = (emailInput && emailInput.value || '').trim();
-        if (!email || !emailRe.test(email)) {
-            ev.preventDefault();
-            showMessage({ ok: false, msg: 'Correo inválido. Usa un correo válido.' });
-            return;
-        }
+    if (!descripcion.value.trim()) { showMessage('La descripción es obligatoria.', false); descripcion.focus(); return; }
 
-        // iniciar loading state, el iframe responderá con postMessage
-        setLoading(true);
+    const impactsSelected = impactChecks.filter(c => c.checked).map(c => c.value);
+    if (!impactsSelected.length) { showMessage('Selecciona cómo afecta el problema (o marca Ninguna).', false); return; }
 
-        // fallback: si no recibimos respuesta en 10s, mostrar error y liberar botón
-        form._subscribeTimeout = setTimeout(() => {
-            setLoading(false);
-            showMessage({ ok: false, msg: 'No se recibió respuesta. Intenta de nuevo más tarde.' });
-        }, 10000);
-    });
+    const file = evidenceInput.files && evidenceInput.files[0];
+    if (!file) { showMessage('Adjunta una imagen como evidencia (≤10 MB).', false); evidenceInput.focus(); return; }
+    if (!file.type.startsWith('image/')) { showMessage('El archivo debe ser una imagen.', false); return; }
+    if (file.size > 10 * 1024 * 1024) { showMessage('El archivo supera 10 MB.', false); return; }
 
-    function showMessage(payload) {
-        if (!msgEl) return;
-        const icon = msgEl.querySelector('.msg-icon');
-        const text = msgEl.querySelector('.msg-text');
-        // quitar clases previas
-        msgEl.classList.remove('msg-success','msg-error','msg-fade-in');
-        if (payload.ok) {
-            msgEl.classList.add('msg-success','msg-fade-in');
-            if (icon) icon.innerHTML = '';
-            if (text) text.textContent = payload.msg || 'Listo, gracias.';
-        } else {
-            msgEl.classList.add('msg-error','msg-fade-in');
-            if (icon) icon.innerHTML = '';
-            if (text) text.textContent = payload.msg || 'Ocurrió un error.';
-        }
-        // small auto-clear after a while
-        clearTimeout(form._msgClearTimeout);
-        form._msgClearTimeout = setTimeout(() => {
-            if (text) text.textContent = '';
-            msgEl.classList.remove('msg-success','msg-error','msg-fade-in');
-        }, 8000);
+    const urg = getSelectedRadioValue(urgenciaRadios);
+    if (!urg) { showMessage('Selecciona el nivel de urgencia.', false); return; }
+
+    if (!form.consent.checked) { showMessage('Debes autorizar el registro para continuar.', false); form.consent.focus(); return; }
+
+    // Construir payload. Incluimos dataUrl de la imagen.
+    let dataUrl = evidenceInput._dataUrl || null;
+    if (!dataUrl) {
+      try { dataUrl = await readFileAsDataURL(file); } catch (e) { console.warn(e); }
     }
+
+    const payload = {
+      correo: inputCorreo.value.trim(),
+      area: inputArea.value.trim(),
+      ubicacion: inputUbic.value.trim(),
+      categoria: categoriaFinal,
+      descripcion: descripcion.value.trim(),
+      impact: impactsSelected,
+      urgencia: urg,
+      created: new Date().toISOString(),
+      evidence: {
+        name: file.name,
+        size: file.size,
+        type: file.type,
+        dataUrl: dataUrl // base64 data URL; el WebApp debe procesarlo
+      }
+    };
+
+    showMessage('Enviando...', true, 10000);
+
+    if (!WEBAPP_URL) {
+      showMessage('WEBAPP_URL no está configurada. Pega la URL del WebApp en scripts.js para enviar.', false, 10000);
+      return;
+    }
+
+    try {
+      const res = await sendToWebApp(payload);
+      if (res.ok) {
+        showMessage('Envío recibido. Gracias.', true);
+        form.reset();
+        evidencePreviewWrap.style.display = 'none';
+      } else {
+        showMessage('Error del servidor: ' + (res.msg || 'respuesta inválida'), false);
+      }
+    } catch (err) {
+      showMessage('Error al enviar: ' + String(err), false);
+    }
+  });
 });
