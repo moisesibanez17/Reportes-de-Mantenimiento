@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzlOMuq97AzG5a3ycx9z_pQqQwGgMuPYgxlQHqY2BcLkDWoyaBhFO8a2O1VsBaPDlzO4g/exec';
+  const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwHaFDQQ7eu7al2kC3Y1m3MrS5EvQ66E7_4Yq8JYIV0dFfhHzbHYHa1DCqoKtV5Kly5hA/exec';
 
   const form = document.getElementById('feedbackForm');
   const msgEl = document.getElementById('formMsg');
@@ -102,8 +102,15 @@ document.addEventListener('DOMContentLoaded', () => {
           mode: 'cors',
           body: JSON.stringify(payload)
         });
+
       const text = await res.text();
-      try { return { ok: true, data: JSON.parse(text) }; } catch (e) { return { ok: true, data: text }; }
+      // Intentar parsear JSON; devolver un objeto con el status para diagnóstico
+      try {
+        const data = JSON.parse(text);
+        return { ok: res.ok, status: res.status, statusText: res.statusText, data };
+      } catch (e) {
+        return { ok: res.ok, status: res.status, statusText: res.statusText, data: text };
+      }
     } catch (err) {
       console.warn('Error enviando al WebApp:', err);
       return { ok: false, msg: String(err) };
@@ -172,12 +179,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const res = await sendToWebApp(payload);
+      console.log('WebApp response:', res);
       if (res.ok) {
         showMessage('Envío recibido. Gracias.', true);
         form.reset();
         evidencePreviewWrap.style.display = 'none';
       } else {
-        showMessage('Error del servidor: ' + (res.msg || 'respuesta inválida'), false);
+        // Construir un mensaje más informativo
+        let errMsg = res.msg || (res.data && (res.data.msg || (typeof res.data === 'string' ? res.data : JSON.stringify(res.data)))) || `HTTP ${res.status || ''} ${res.statusText || ''}`;
+        showMessage('Error del servidor: ' + errMsg, false);
       }
     } catch (err) {
       showMessage('Error al enviar: ' + String(err), false);
